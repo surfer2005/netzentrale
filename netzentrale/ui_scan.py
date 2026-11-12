@@ -296,7 +296,7 @@ class PortScanPage(QWidget):
         bar = QHBoxLayout()
         bar.addWidget(QLabel("Host:"))
         self.host = QLineEdit()
-        self.host.setPlaceholderText("IP, Name oder URL – z. B. 192.168.1.20, pi.local, https://www.bsb.de")
+        self.host.setPlaceholderText("IP, Name oder URL – z. B. 192.168.1.20, pi.local, https://www.beispiel.de")
         self.host.returnPressed.connect(self.toggle)
         bar.addWidget(self.host, 2)
         bar.addWidget(QLabel("Ports:"))

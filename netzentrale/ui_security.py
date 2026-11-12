@@ -47,7 +47,7 @@ class SecurityPage(QWidget):
         lay.addWidget(intro)
         bar = QHBoxLayout()
         self.host = QLineEdit()
-        self.host.setPlaceholderText("IP, Name oder URL – z. B. 192.168.1.20 oder https://kasse.bsb.local")
+        self.host.setPlaceholderText("IP, Name oder URL – z. B. 192.168.1.20 oder https://kasse.firma.local")
         self.host.returnPressed.connect(self.start)
         bar.addWidget(self.host, 1)
         self.btn = QPushButton("Check starten")

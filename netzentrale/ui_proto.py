@@ -400,7 +400,7 @@ class MqttPage(QWidget):
         sub = QHBoxLayout()
         sub.addWidget(QLabel("Abonnieren:"))
         self.topic = QLineEdit("#")
-        self.topic.setToolTip("# = alle Themen, + = eine Ebene, z. B. bordwaechter/+/status")
+        self.topic.setToolTip("# = alle Themen, + = eine Ebene, z. B. sensor/+/status")
         sub.addWidget(self.topic, 1)
         b = QPushButton("Abonnieren")
         b.clicked.connect(self.subscribe)

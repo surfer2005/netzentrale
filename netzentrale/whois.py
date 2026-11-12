@@ -40,7 +40,7 @@ def lookup(query: str, emit=print) -> None:
         is_ip = False
     if not is_ip:
         parts = q.split(".")
-        # Subdomain abschneiden (www.bsb.de → bsb.de); Sonderfälle wie co.uk bleiben unberücksichtigt
+        # Subdomain abschneiden (www.beispiel.de → beispiel.de); Sonderfälle wie co.uk bleiben unberücksichtigt
         if len(parts) > 2:
             q = ".".join(parts[-2:])
     tld = q.rsplit(".", 1)[-1]

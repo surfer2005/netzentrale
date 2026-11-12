@@ -84,7 +84,7 @@ class DeviceDialog(QDialog):
         form = QFormLayout(w)
         self.name = QLineEdit(d.name)
         self.host = QLineEdit(d.host)
-        self.host.setPlaceholderText("IP-Adresse oder Hostname, z. B. 192.168.1.20 oder bordwaechter-01.local")
+        self.host.setPlaceholderText("IP-Adresse oder Hostname, z. B. 192.168.1.20 oder server-01.local")
         self.group = QComboBox()
         self.group.setEditable(True)
         self.group.addItems(sorted(set(groups) | {"Allgemein"}, key=str.lower))
@@ -125,7 +125,7 @@ class DeviceDialog(QDialog):
         self.rdp_box, f = self._section("RDP (Windows)", d.rdp)
         self.rdp_port = self._port(d.rdp, 3389)
         self.rdp_user = QLineEdit((d.rdp or {}).get("user", ""))
-        self.rdp_user.setPlaceholderText("optional, z. B. BSB\\pbode")
+        self.rdp_user.setPlaceholderText("optional, z. B. FIRMA\\benutzer")
         f.addRow("Port:", self.rdp_port)
         f.addRow("Benutzer:", self.rdp_user)
         f.addRow("Passwort:", self._pw("rdp"))
@@ -565,7 +565,7 @@ class DevicesPage(QWidget):
         m.exec(self.tree.viewport().mapToGlobal(pos))
 
     def _duplicate(self, d: Device):
-        """Praktisch für viele gleichartige Geräte (z. B. Bordwächter): nur Name/Adresse anpassen."""
+        """Praktisch für viele gleichartige Geräte: nur Name/Adresse anpassen."""
         import uuid
         c = copy.deepcopy(d)
         c.id = uuid.uuid4().hex[:12]

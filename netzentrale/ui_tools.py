@@ -36,7 +36,7 @@ class CommandPage(QWidget):
     """Basis: Eingabezeile + Start/Stopp + Live-Ausgabe eines Systembefehls."""
     title = ""
     needs_host = True
-    host_hint = "Adresse oder Name, z. B. 192.168.1.1 oder bsb.de"
+    host_hint = "Adresse oder Name, z. B. 192.168.1.1 oder beispiel.de"
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -208,7 +208,7 @@ class TraceroutePage(CommandPage):
 
 
 class WhoisPage(CommandPage):
-    host_hint = "Domain oder IP, z. B. bsb.de"
+    host_hint = "Domain oder IP, z. B. beispiel.de"
 
     def command(self, host):
         return ["whois", host]

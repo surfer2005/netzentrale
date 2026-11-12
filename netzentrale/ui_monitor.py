@@ -139,7 +139,7 @@ class TargetDialog(QDialog):
         k = self.kind.currentData()
         self.port.setEnabled(k == "tcp")
         self.cert.setEnabled(k == "web")
-        self.target.setPlaceholderText("https://bordwaechter-01.local" if k == "web" else "IP oder Hostname")
+        self.target.setPlaceholderText("https://server-01.local" if k == "web" else "IP oder Hostname")
 
     def _ok(self):
         if not self.target.text().strip():

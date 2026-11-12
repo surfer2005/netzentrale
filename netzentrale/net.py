@@ -35,7 +35,7 @@ VENDOR_PREFIX = {
 
 
 def host_from_input(text: str) -> tuple[str, int | None]:
-    """'https://www.bsb.de:8443/pfad?x' → ('www.bsb.de', 8443); 'pi.local' → ('pi.local', None)."""
+    """'https://www.beispiel.de:8443/pfad?x' → ('www.beispiel.de', 8443); 'pi.local' → ('pi.local', None)."""
     from urllib.parse import urlparse
     t = text.strip()
     if not t:
