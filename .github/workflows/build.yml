@@ -1,0 +1,88 @@
+# Baut die Netzentrale für Windows (.exe + Installer) und macOS (.app) aus demselben Code.
+#  - bei jedem Push auf main:  Ergebnisse unter „Actions“ → Lauf → „Artifacts“
+#  - bei einem Versions-Tag (z. B. v0.7.0):  zusätzlich ein GitHub-Release mit den Dateien
+name: Netzentrale bauen
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: windows
+          - os: macos-latest        # Apple Silicon (M1–M4)
+            target: macos
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Abhängigkeiten
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller pillow
+
+      - name: Version lesen
+        run: echo "VERSION=$(python -c 'import netzentrale; print(netzentrale.__version__)')" >> "$GITHUB_ENV"
+
+      - name: Symbole und Versionsinfo
+        run: |
+          python tools/make_icon.py build/AppIcon
+          python packaging/make_version_info.py
+
+      - name: Programm bauen (PyInstaller)
+        run: pyinstaller packaging/netzentrale.spec --noconfirm
+
+      - name: Windows – Installer und portable ZIP
+        if: matrix.target == 'windows'
+        run: |
+          ISCC="/c/Program Files (x86)/Inno Setup 6/ISCC.exe"
+          if [ ! -f "$ISCC" ]; then choco install innosetup -y --no-progress; fi
+          "$ISCC" "//DAppVersion=$VERSION" installer/netzentrale.iss
+          (cd dist && 7z a -tzip "Netzentrale-Windows-portable-$VERSION.zip" Netzentrale > /dev/null)
+          ls -la dist
+
+      - name: macOS – App packen
+        if: matrix.target == 'macos'
+        run: |
+          ditto -c -k --keepParent dist/Netzentrale.app "dist/Netzentrale-macOS-$VERSION.zip"
+          ls -la dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Netzentrale-${{ matrix.target }}-${{ env.VERSION }}
+          path: |
+            dist/*.exe
+            dist/*.zip
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artefakte
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: Netzentrale ${{ github.ref_name }}
+          files: artefakte/*

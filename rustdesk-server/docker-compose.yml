@@ -1,0 +1,24 @@
+# RustDesk-Server (Open Source) – ID-Server (hbbs) und Relay (hbbr)
+# Vor dem Start: fernhilfe.example.de durch den eigenen DNS-Namen ersetzen.
+# Start:  docker compose up -d
+# Schlüssel danach:  cat data/id_ed25519.pub   → in Netzentrale unter „Fernhilfe → Schlüssel“ eintragen
+services:
+  hbbs:
+    container_name: hbbs
+    image: rustdesk/rustdesk-server:latest
+    command: hbbs -r fernhilfe.example.de:21117
+    volumes:
+      - ./data:/root
+    network_mode: host
+    depends_on:
+      - hbbr
+    restart: unless-stopped
+
+  hbbr:
+    container_name: hbbr
+    image: rustdesk/rustdesk-server:latest
+    command: hbbr
+    volumes:
+      - ./data:/root
+    network_mode: host
+    restart: unless-stopped
