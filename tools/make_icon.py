@@ -1,4 +1,5 @@
 """App-Symbol: Bildschirm mit Netzwerk-Knoten."""
+import os
 import sys
 from PIL import Image, ImageDraw
 
@@ -30,6 +31,7 @@ for i, (x, y) in enumerate(nodes):
 d.ellipse([700, 760, 800, 860], fill=green)
 
 out = sys.argv[1]
+os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
 img.save(out + ".png")
 img.save(out + ".icns", sizes=[(16, 16), (32, 32), (64, 64), (128, 128), (256, 256), (512, 512), (1024, 1024)])
 img.save(out + ".ico", sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])
