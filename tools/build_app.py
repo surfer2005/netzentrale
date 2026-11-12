@@ -17,7 +17,7 @@ PLIST = f"""<?xml version="1.0" encoding="UTF-8"?>
 <dict>
     <key>CFBundleName</key><string>{APP_NAME}</string>
     <key>CFBundleDisplayName</key><string>{APP_NAME}</string>
-    <key>CFBundleIdentifier</key><string>de.bsb.netzentrale</string>
+    <key>CFBundleIdentifier</key><string>de.peterbode.netzentrale</string>
     <key>CFBundleVersion</key><string>{__version__}</string>
     <key>CFBundleShortVersionString</key><string>{__version__}</string>
     <key>CFBundlePackageType</key><string>APPL</string>

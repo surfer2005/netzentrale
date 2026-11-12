@@ -8,10 +8,10 @@
 #endif
 
 [Setup]
-AppId={{6C1F0B6E-6E4B-4E2B-9D0A-BSB-NETZENTRALE}
+AppId={{6C1F0B6E-6E4B-4E2B-9D0A-PETERBODE-NTZ}
 AppName=Netzentrale
 AppVersion={#AppVersion}
-AppPublisher=Bodensee-Schiffsbetriebe – IT
+AppPublisher=Peter Bode
 DefaultDirName={autopf}\Netzentrale
 DefaultGroupName=Netzentrale
 DisableProgramGroupPage=yes

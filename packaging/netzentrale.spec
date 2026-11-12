@@ -33,7 +33,7 @@ exe = EXE(pyz, a.scripts, [], exclude_binaries=True, name=APP_NAME, console=Fals
 coll = COLLECT(exe, a.binaries, a.datas, name=APP_NAME, upx=False)
 
 if sys.platform == "darwin":
-    app = BUNDLE(coll, name=f"{APP_NAME}.app", icon=icon, bundle_identifier="de.bsb.netzentrale",
+    app = BUNDLE(coll, name=f"{APP_NAME}.app", icon=icon, bundle_identifier="de.peterbode.netzentrale",
                  info_plist={
                      "CFBundleShortVersionString": __version__, "CFBundleVersion": __version__,
                      "NSHighResolutionCapable": True, "LSMinimumSystemVersion": "11.0",

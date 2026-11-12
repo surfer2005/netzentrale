@@ -20,7 +20,7 @@ class DaliPage(QWidget):
         super().__init__(parent)
         self.setStyleSheet(STYLE)
         self.device_store = device_store
-        self.settings = QSettings("BSB", "Netzentrale")
+        self.settings = QSettings("Peter Bode", "Netzentrale")
         self.pool = QThreadPool.globalInstance()
         self.gw: DaliGateway | None = None
         self.devices: dict[int, DaliDevice] = {}

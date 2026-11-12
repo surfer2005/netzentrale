@@ -37,7 +37,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle(APP_NAME)
-        self.settings = QSettings("BSB", APP_NAME)
+        self.settings = QSettings("Peter Bode", APP_NAME)
         self.resize(self.settings.value("size", QSize(1180, 780)))
         self.store = DeviceStore()
 
@@ -332,7 +332,7 @@ def main():
     if osinfo.IS_WIN:
         try:   # eigenes Symbol in der Taskleiste statt des Python-Symbols
             import ctypes
-            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("BSB.Netzentrale")
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("PeterBode.Netzentrale")
         except Exception:  # noqa: BLE001
             pass
     app = QApplication(sys.argv)

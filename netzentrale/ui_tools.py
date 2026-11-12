@@ -345,7 +345,7 @@ class SpeedtestPage(CommandPage):
         from PySide6.QtCore import QSettings
         from PySide6.QtWidgets import QFrame, QGridLayout, QHeaderView, QTableWidget
         super().__init__(parent)
-        self.settings = QSettings("BSB", "Netzentrale")
+        self.settings = QSettings("Peter Bode", "Netzentrale")
         lay = self.layout()
 
         tiles = QGridLayout()

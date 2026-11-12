@@ -36,7 +36,7 @@ class SupportPage(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.settings = QSettings("BSB", "Netzentrale")
+        self.settings = QSettings("Peter Bode", "Netzentrale")
         self._check: ServerCheck | None = None
         lay = QVBoxLayout(self)
 
